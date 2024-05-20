@@ -12,6 +12,9 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
+        <li>
+          <a href="" class="btn btn-secondary pt-1">catalogo</a>
+        </li>
       </ul>
     </div>
   </div>
