@@ -10,7 +10,7 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">chi siamo</a>
+          <a class="nav-link" href="#">Chi Siamo</a>
         </li>
         <li>
           <a href="" class="btn btn-secondary pt-1">catalogo</a>
