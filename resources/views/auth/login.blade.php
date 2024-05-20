@@ -1,98 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+<x-layout>
+  <div class="container-fluid p-5 bg-info text-center text-white">
+      <div class="row justify-content-center">
+       <h1 class="display-1">
+           Login
+       </h1>
+      </div>
+   </div>
+   <div class="container my-5">
+      <div class="row justify-content-center">
+          <div class="col-12 col-md-8">
+              @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+              @endif
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+              <form class="card p-5 shadow" action="{{ route('login')}}" method="POST">
+                  @csrf
 
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
+                  <div class="mb-3">
+                      <label for="email" class="form-label">Email:</label>
+                      <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}">
+                    </div>
 
-button:hover {
-  opacity: 0.8;
-}
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password:</label>
+                      <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}">
+                    </div>
 
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
-</head>
-<body>
-
-<h2>Login Form</h2>
-
-<form action="/action_page.php" method="post">
-  <div class="imgcontainer">
-    <img src="img_avatar2.png" alt="Avatar" class="avatar">
-  </div>
-
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-        
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-</form>
-
-</body>
-</html>
+                    <div class="mb-3">
+                      <button class="btn bg-info text-white">Login</button>
+                      <p class="small mt-2">Not registred?<a href="{{ route('register')}}">Click Here</a></p>
+                    </div>
+                    
+                </form>
+          </div>
+      </div>
+   </div>
+</x-layout>
