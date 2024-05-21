@@ -1,82 +1,54 @@
-<!DOCTYPE html>
-<html lang="en-us">
-    <head>
-        <meta charset="UTF-8">
-        <title>Registrazione</title>
-        <link rel="stylesheet" href="./responsiveRegistration.css">
-        <script type="text/javascript" lang="javascript" src="./responsiveRegistaration.js"></script>
-    </head>
-       
-    <body>
-        <h1>Registrazione</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col-10">
-                    <label for="fname">Nome:</label>
+<x-layout>
+    <div class="container-fluid p-5 bg-info text-center text-white">
+        <div class="row justify-content-center">
+         <h1 class="display-1">
+             Sign Up
+         </h1>
+        </div>
+     </div>
+     <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                <div class="col-90">
-                    <input type="text" id="fname" name="firstname" placeholder="Enter your first name">
-                </div>
+                @endif
+
+                <form class="card p-5 shadow" action="{{ route('register')}}" method="POST">
+                    @csrf
+
+                    <div class="mb-3">
+                      <label for="username" class="form-label">Username:</label>
+                      <input type="text" name="name" class="form-control" id="username" value="{{ old('name') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="password_confirmation" class="form-label">Password:</label>
+                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
+                      </div>
+
+                      <div class="mb-3">
+                        <button class="btn bg-info text-white">Sign Up</button>
+                        <p class="small mt-2">Already Registred? <a href="{{ route('login')}}">Click Here</a></p>
+                      </div>
+                      
+                  </form>
             </div>
-            <div class="row">
-                <div class="col-10">
-                    <label for="lname">Cognome:</label>
-                </div>
-                <div class="col-90">
-                    <input type="text" id="lname" name="lastname" placeholder="Enter your last name">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-10">
-                    <label for="email">Email:</label>
-                </div>
-                <div class="col-90">
-                    <input type="email" id="email" name="email" placeholder="it should contain @,.">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-10">
-                    <label for="mobile">telefono:</label>
-                </div>
-                <div class="col-90">
-                    <input type="tel" id="mobile" name="mobile" placeholder="only 10 digits are allowed">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-10">
-                    <label for="dob">Data Di Nascita:</label>
-                </div>
-                <div class="col-90">
-                    <input type="Date" id="dob" name="dob">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-10">
-                    <label for="address">Indirizzo:</label>
-                </div>
-                <div class="col-90">
-                    <textarea name="address" id="address" cols="30" rows="10"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-10">
-                    <label for="city">Città:</label>
-                </div>
-                <div class="col-90">
-                    <input type="text" id="city" name="city" maxlength="10">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-10">
-                    <label for="password">Password:</label>
-                </div>
-                <div class="col-90">
-                    <input type="password" id="password" name="password" maxlength="8">
-                </div>
-            </div>
-            <div class="row">
-                <input type="submit" value="Registered" onclick="SaveStudentDetails()">
-            </div>  
-        </div>  
-    </body>
-</html>
+        </div>
+     </div>
+</x-layout>
