@@ -8,7 +8,7 @@ use Illuminate\Routing\Route;
 
 
 
-Route::get('/article/create', [ArticleController::class, 'create'])->name('article.create');
+
 
 class ArticleController extends Controller
 {
