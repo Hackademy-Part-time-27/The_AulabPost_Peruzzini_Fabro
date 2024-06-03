@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
-
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -32,7 +31,26 @@ class ArticleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {$request->validate([
+        'title'=> 'required|unique:articles|min:5',
+        'subtitle'=> 'required|min:5',
+        'body'=> 'required|min:10',
+        'image'=> 'image|required',
+        'category'=> 'required',
+
+    ]);
+
+    $article= Article::create([
+        'title'=> $request->title,
+        'subtitle'=> $request->subtitle,
+        'body'=> $request->body,
+        'image'=> $request->file('image')->store('public/images'),
+        'category_id'=> $request->category,
+        'user_id'=> Auth::user()->id,
+
+    ]);
+
+    return redirect(route('onpage'))-> with('message' , 'Articolo creato correttamente');
         //
     }
 
