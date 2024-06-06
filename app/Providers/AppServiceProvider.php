@@ -31,8 +31,4 @@ class AppServiceProvider extends ServiceProvider
     }
  
     
-<<<<<<< HEAD
-=======
-        
->>>>>>> 5a985a5501f7e0dc2e4e396a0a20e4ce0477d9fc
 }
