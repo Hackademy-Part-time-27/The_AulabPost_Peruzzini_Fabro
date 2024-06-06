@@ -28,11 +28,7 @@ class AppServiceProvider extends ServiceProvider
             $categories = Category::all();
             View::share(['categories' => $categories]);
         }
-<<<<<<< HEAD
     }
  
     
-=======
-    }    
->>>>>>> fec940421a982e17281e6bb3a0f13432d86bfa83
 }
