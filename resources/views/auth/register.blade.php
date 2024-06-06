@@ -43,7 +43,7 @@
                       </div>
 
                       <div class="mb-3">
-                        <button class="btn bg-info text-white">Sign Up</button>
+                        <button type="submit" class="btn bg-info text-white">Sign Up</button>
                         <p class="small mt-2">Already Registred? <a href="{{ route('login')}}">Click Here</a></p>
                       </div>
                       

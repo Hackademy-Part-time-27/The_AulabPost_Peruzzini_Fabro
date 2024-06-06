@@ -26,7 +26,8 @@ class ArticleController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        //
+        $article = Article::orderBy('created_at' , 'desc')->get();
+        return view('article.index' , compact('articles'));
     }
 
     /**
@@ -69,7 +70,7 @@ class ArticleController extends Controller implements HasMiddleware
      */
     public function show(Article $article)
     {
-        //
+        return view('article.show' , compact('article'));
     }
 
     /**
