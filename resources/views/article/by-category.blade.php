@@ -2,7 +2,7 @@
       <div class="container-fluid p-5 bg-info text-center text-white">
          <div class="row justify-content-center">
             <h1 class="display-1">
-                The Aulab Post
+                Categoria : {{ $category->name}}
             </h1>
          </div>
       </div>
@@ -27,15 +27,11 @@
                   data="{{$article->created_at->format('d/m/Y')}}"
                   user="{{$article->user->name}}"
                   url="{{route('article.show' , compact('article'))}}"
-                  urlCategory="{{ $route('article.byCategory' , ['category' => $article->category->id]) }}"
+                  urlCategory="{{$route('article.byCategory' , ['category' => $article->category->id]) }}"
                   
                />
 
                </div>
-
-               <p class="small text-muted">Categoria:
-                  <a href="{{route('article.byCategory' , $article->category)}}" class="text-capitalize text-muted">{$article->category->name}</a>>
-               </p>
                 
             @endforeach
          </div>
