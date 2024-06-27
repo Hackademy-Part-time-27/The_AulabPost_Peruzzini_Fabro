@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\CareerRequestMail;
 use Illuminate\Http\Request;
 use App\Models\Article;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class PublicController extends Controller implements HasMiddleware
 {
@@ -33,6 +37,28 @@ class PublicController extends Controller implements HasMiddleware
             'message' => 'required',
         ]);
 
-        dd($request->all());
+          $user=Auth::user();
+          $role=$request->role;
+          $email=$request->email;
+          $message=$request->message;
+
+          Mail::to('admin@theaulabpost.it')->send(new CareerRequestMail(compact('role' , 'email' , 'message')));
+
+
+            switch ($role) {
+              case 'admin':
+                 $user->is_admin = NULL;
+                    break;
+              case 'revisor':
+                 $user->is_revisor = NULL;
+                     break;
+              case 'writer':
+                 $user->is_writer = NULL;
+                     break;
+         }
+
+         $user->update();
+         return redirect(route('homepage'))->with('message' , 'Mail inviata con successo!');
+
     }
 }

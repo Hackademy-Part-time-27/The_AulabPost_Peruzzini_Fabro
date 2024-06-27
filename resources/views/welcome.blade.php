@@ -7,9 +7,9 @@
          </div>
       </div>
 
-      @if (session('message'))
-      <div class="alert alert-success text-center">
-         {{session('message')}}
+      @if (session('alert'))
+      <div class="alert alert-danger">
+         {{session('alert')}}
          </div>
           
       @endif
@@ -34,7 +34,7 @@
                </div>
 
                <p class="small text-muted">Categoria:
-                  <a href="{{route('article.byCategory' , $article->category)}}" class="text-capitalize text-muted">{$article->category->name}</a>>
+                  <a href="{{route('article.byCategory' , $article->category)}}" class="text-capitalize text-muted">{ $article->category->name }</a>>
                </p>
                 
             @endforeach

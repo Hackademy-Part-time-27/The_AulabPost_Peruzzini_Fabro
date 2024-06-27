@@ -28,14 +28,19 @@
                 </div>
                     
                 @endif
-                <form action="{{ route('careers.submit')}}" method="POST" class="p-5">
+                <form action="{{ route('careers.submit')}}" method="POST" class="card p-5 shadow">
                     @csrf
                     <div class="mb-3">
                         <label for="role" class="form-lable">Per quale ruolo ti stai candidando?</label>
                         <select name="role" id="role" class="form-control">
-                            <option value="">Segli qui</option>
+                            <option value=""selected disabled>Seleziona il ruolo</option>
+                            @if (!Auth::user()->is_admin)
                             <option value="admin">Amministratore</option>
+                            @endif 
+                            @if (!Auth::user()->is_revisor)
                             <option value="revisor">Revisore</option>
+                            @endif 
+                            @if (!Auth::user()->is_writer)
                             <option value="writer">Redattore</option>
                         </select>
                     </div>
