@@ -42,6 +42,7 @@
                             @endif 
                             @if (!Auth::user()->is_writer)
                             <option value="writer">Redattore</option>
+                            @endif
                         </select>
                     </div>
                     <div class="mb-3">
