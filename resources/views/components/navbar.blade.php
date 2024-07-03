@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="{{route('homepage')}}">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{route('article.create')}}">Post an Article</a>
@@ -20,9 +20,15 @@
         </li>
         
        @auth
+
        @if (Auth::user()->is_admin)
            <li><a class="dropdown-item p-2" href="{{route('admin.dashboard')}}">Dashboard Admin</a></li>
        @endif
+
+       @if (Auth::user()->is_revisor)
+           <li><a class="dropdown-item p-2" href="{{route('revisor.dashboard')}}">Dashboard Revisor</a></li>
+      @endif
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Welcome {{ Auth::user()->name}}

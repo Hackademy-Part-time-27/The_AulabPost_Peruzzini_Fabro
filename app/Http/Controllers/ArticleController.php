@@ -18,7 +18,7 @@ class ArticleController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth' , except: ['index', 'show' ,'byCategory' , 'byUser']),
+            new Middleware('auth' , except: ['index', 'show', 'byCategory', 'byUser']),
         ];
         
     }
@@ -33,7 +33,7 @@ class ArticleController extends Controller implements HasMiddleware
 
     public function byCategory(Category $category)
     {
-        $articles = $category->articles()->orderby('created_at' , 'desc')->get();
+        $articles = $category->articles()->orderBy('created_at' , 'desc')->get();
         return view('article.by-category' , compact('category' , 'articles'));
     }
 

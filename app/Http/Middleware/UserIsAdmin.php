@@ -18,9 +18,10 @@ class UserIsAdmin
     {
         if(Auth::user() && Auth::user()->is_admin){
         return $next($request);
-        }
+    }
    
-        return redirect(route('homepage'))->with('alert' , 'Non sei autorizzato');
+        return redirect(route('homepage'))->with('alert', 'Non sei autorizzato');
+        
     }
 }
   

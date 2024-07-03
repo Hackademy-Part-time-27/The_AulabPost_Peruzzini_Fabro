@@ -8,35 +8,39 @@
       </div>
 
       @if (session('alert'))
-      <div class="alert alert-danger">
+      <div class="alert alert-danger text-center">
          {{session('alert')}}
          </div>
           
       @endif
 
+      @if (session('message'))
+         <div class="alert alert-success text-center">
+            {{session('message')}}
+         </div>
+          
+      @endif
+
       <div class="container my-5">
-         <div class="row justify-content-center">
+         <div class="row justify-content-evenly">
             @foreach ($articles as $article)
                <div class="col-12 col-md-3">
-
-                  <x-card
-                  title="{{$article->title}}"
-                  subtitle="{{$article->subtitle}}"
-                  image="{{$article->image}}"
-                  category="{{$article->category->name}}"
-                  data="{{$article->created_at->format('d/m/Y')}}"
-                  user="{{$article->user->name}}"
-                  url="{{route('article.show' , compact('article'))}}"
-                  urlCategory="{{route('article.byCategory' , ['category' => $article->category->id]) }}"
-                  
-               />
-
+                 <div class="card" style="width: 18rem;">
+                    <img src="{{ Storage::url($article->image) }}" class="card-img-top" alt="Immagine dell'articolo: {{ $article->title }}">
+                    <div class="card-body">
+                       <h5 class="card-title">{{ $article->title }}</h5>
+                       <p class="card-subtitle">{{ $article->subtitle }}</p>
+                       <p class="small text-muted">Categoria:
+                          <a href="#" class="text-capitalize text-muted">{{ $article->category->name }}</a>
+                       </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                       <p>Redatto il {{ $article->created_at->format('d/m/y') }} <br>
+                       da {{ $article->user->name }}</p>
+                       <a href="{{route('article.show', $article)}}" class="btn btn-outline-secondary">Leggi</a>
+                    </div>
+                 </div>
                </div>
-
-               <p class="small text-muted">Categoria:
-                  <a href="{{route('article.byCategory' , $article->category)}}" class="text-capitalize text-muted">{ $article->category->name }</a>>
-               </p>
-                
             @endforeach
          </div>
       </div>

@@ -30,7 +30,8 @@ class PublicController extends Controller implements HasMiddleware
         return view('careers');
     }
 
-    public function careersSubmit(Request $request) {
+    public function careersSubmit(Request $request) 
+    {
         $request->validate([
             'role' => 'required',
             'email' => 'required|email',
@@ -41,8 +42,9 @@ class PublicController extends Controller implements HasMiddleware
           $role=$request->role;
           $email=$request->email;
           $message=$request->message;
+          $info = compact('role', 'email', 'message');
 
-          Mail::to('admin@theaulabpost.it')->send(new CareerRequestMail(compact('role' , 'email' , 'message')));
+          Mail::to('emilsonfabro@gmail.com')->send(new CareerRequestMail($info));
 
 
             switch ($role) {
@@ -58,7 +60,7 @@ class PublicController extends Controller implements HasMiddleware
          }
 
          $user->update();
-         return redirect(route('homepage'))->with('message' , 'Mail inviata con successo!');
+         return redirect(route('homepage'))->with('message', 'Mail inviata con successo!');
 
     }
 }
