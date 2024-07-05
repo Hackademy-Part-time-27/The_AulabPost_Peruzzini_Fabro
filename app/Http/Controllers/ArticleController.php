@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use App\Models\Tag;
 
 
 
@@ -31,6 +32,12 @@ class ArticleController extends Controller implements HasMiddleware
         return view('article.index' , compact('articles'));
     }
 
+    public function articleSearch(Request $request){
+        $query = $request->input('query');
+        $articles = Article::search($query)->where('is_accepted', true)->orderBy('created_at', 'desc')->get();
+        return view('article.search-index', compact('articles', 'query'));
+    }
+
     public function byCategory(Category $category)
     {
         $articles = $category->articles()->where('is_accepted', true)->orderBy('created_at' , 'desc')->get();
@@ -48,17 +55,19 @@ class ArticleController extends Controller implements HasMiddleware
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {$request->validate([
+    public function store(Request $request){
+
+        $request->validate([
         'title'=> 'required|unique:articles|min:5',
         'subtitle'=> 'required|min:5',
         'body'=> 'required|min:10',
         'image'=> 'image|required',
         'category'=> 'required',
+        'tags' => 'required',
 
     ]);
 
-    $article= Article::create([
+    $article = Article::create([
         'title'=> $request->title,
         'subtitle'=> $request->subtitle,
         'body'=> $request->body,
@@ -68,7 +77,22 @@ class ArticleController extends Controller implements HasMiddleware
 
     ]);
 
-    return redirect(route('homepage'))-> with('message' , 'Articolo creato correttamente');
+    $tags = explode(',', $request->tags);
+
+        foreach($tags as $i => $tag){
+            $tags[$i] = trim($tag);
+        }
+
+        foreach($tags as $tag){
+            $newTag = Tag::updateOrCreate([
+                'name' => strtolower($tag)
+            ]);
+
+            $article->tags()->attach($newTag);
+        }
+    
+
+        return redirect(route('homepage'))-> with('message' , 'Articolo creato correttamente');
         //
     }
 
@@ -77,7 +101,7 @@ class ArticleController extends Controller implements HasMiddleware
      */
     public function show(Article $article)
     {
-        return view('article.show' , compact('article'));
+        return view('article.show', compact('article'));
     }
 
     /**
@@ -105,9 +129,4 @@ class ArticleController extends Controller implements HasMiddleware
         //
     }
 
-    public function articleSearch(Request $request){
-        $query = $request->input('query');
-        $articles = Article::search($query)->where('is_accepted', true)->orderBy('created_at', 'desc')->get();
-        return view('article.search-index', compact('articles', 'query'));
-    }
 }

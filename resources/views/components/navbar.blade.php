@@ -10,7 +10,7 @@
           <a class="nav-link active" aria-current="page" href="{{route('homepage')}}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{route('article.create')}}">Post an Article</a>
+          <a class="nav-link" href="{{route('article.create')}}">Pubblica un articolo</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{route('article.index')}}">Tutti gli articoli</a>
