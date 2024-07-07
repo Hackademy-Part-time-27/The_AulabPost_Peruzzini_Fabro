@@ -27,7 +27,11 @@
 
        @if (Auth::user()->is_revisor)
            <li><a class="dropdown-item p-2" href="{{route('revisor.dashboard')}}">Dashboard Revisor</a></li>
-      @endif
+       @endif
+
+       @if (Auth::user()->is_writer)
+          <li><a class="dropdown-item p-2" href="{{ route('writer.dashboard') }}">Dashboard Redattore</a></li>
+       @endif
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

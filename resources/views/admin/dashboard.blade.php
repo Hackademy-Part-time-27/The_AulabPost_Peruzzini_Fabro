@@ -60,9 +60,14 @@
             <div class="row justify-content-center">
                 <div class="col-12">
                     <h2>Tutte le categorie</h2>
-                    <x-metainfo-table :metaInfos="$tags" metaType="tags"/>
+                    <form action="{{route('admin.storeCategory')}}" method="POST" class="w-50 d-flex m-3">
+                        @csrf
+                        <input type="text" name="name" class="from-control me-2" placeholder="Inserisci una nuova categoria">
+                        <button type="submit" class="btn btn-outline-secondary">Inserisci</button>
+                    </form>
                 </div>
             </div>
+            <x-metainfo-table :metaInfos="$tags" metaType="tags"/>
         </div>
             
 
