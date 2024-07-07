@@ -44,7 +44,7 @@ class AdminController extends Controller
             'name' => strtolower($request->name),
         ]);
 
-        return redirect()->with('message', 'Tag aggiornato correttamente');
+        return redirect()->back()->with('message', 'Tag aggiornato correttamente');
     }
 
     public function deleteTag(Tag $tag){

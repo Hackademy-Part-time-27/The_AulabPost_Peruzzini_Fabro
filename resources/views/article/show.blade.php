@@ -58,7 +58,7 @@
                     <a href="{{route('article.index')}}" class="btn btn-info text-white my-5">Torna indietro</a>
                    </div>
                    <p class="fs-5">Categoria:
-                  <a href="{{route('article.byCategory' , $article->category)}}" class="text-capitalize fw-bold text-muted">{$article->category->name}</a>>
+                  <a href="{{route('article.byCategory' , $article->category)}}" class="text-capitalize fw-bold text-muted">{{$article->category->name}}</a>>
                </p>
                </div>
          </div>

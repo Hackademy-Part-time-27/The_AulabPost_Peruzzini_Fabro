@@ -24,9 +24,9 @@
                 </td>
                 <td>{{ $article->created_at->format('d/m/Y') }}</td>
                 <td>
-                    <a href="{{ route('article.show', compact('article')) }}" class="btn btn-info text-white">Leggi l'articolo</a>
-                    <a href="{{ route('article.edit', compact('article')) }}" class="btn btn-warning text-white">Modifica</a>
-                    <form action="{{ route('article.destroy', compact('article')) }}" method="POST" class="d-inline">
+                    <a href="{{ route('article.show', $article) }}" class="btn btn-info text-white">Leggi l'articolo</a>
+                    <a href="{{ route('article.edit', $article) }}" class="btn btn-warning text-white">Modifica</a>
+                    <form action="{{ route('article.destroy', $article) }}" method="POST" class="d-inline">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">Elimina</button>
